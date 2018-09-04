@@ -46,8 +46,7 @@ To actually use it in another HTML file, we can use another nifty new feature - 
 ```html
 <link rel="import" href="source/to-your-file.html">
 ```
-
-and "invoke" it:
+...and "invoke" it:
 ```html
 <custom-counter></custom-counter>
 ```
