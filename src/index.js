@@ -6,7 +6,7 @@ class DragonTask extends HTMLElement {
             if (this.disabled) {
                 return
             }
-            this.toggleExpanded()
+            this.expanded = !this.expanded
         })
     }
     get observedAttributes () {
@@ -16,12 +16,12 @@ class DragonTask extends HTMLElement {
         return this.hasAttribute('expanded')
     }
     set expanded(v) {
+        console.log('Expanded:', v)
         if (v) {
             this.setAttribute('expanded', '')
         } else {
             this.removeAttribute('expanded')
         }
-        this.toggleExpanded()
     }
     get disabled() {
         return this.hasAttribute('disabled')
@@ -35,13 +35,10 @@ class DragonTask extends HTMLElement {
     }
     connectedCallback() {
         console.log('I was inserted into the DOM!')
+        this.innerHTML = '<b>test</b>'
     }
     disconnectedCallback() {
         console.log('Oh no, I am being removed from the DOM!')
-    }
-    toggleExpanded () {
-        console.log('Expanded is being toggled!')
-        this.expanded = !this.expanded
     }
 }
 

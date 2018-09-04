@@ -1,0 +1,28 @@
+
+<button onclick="increment()">Click me!</button>
+<div id="root"></div>
+
+<script>
+    const increment = () => {
+        console.log('incrementing!')
+        //Grabbing a reference to the template:
+        var content = document.querySelector('template').content;
+        // Updating count in template. Templates are mutable!
+        var span = content.querySelector('span');
+        span.textContent = parseInt(span.textContent) + 1;
+        //importing newly updated template and appending it to #root
+        document.querySelector('#root').appendChild(document.importNode(createCounterLine(span.textContent), true));
+    }
+</script>
+<template id="my-template">
+    <div> I am a counter: <span>0</span></div>
+</template>
+<br/>
+<script>
+    const createCounterLine = (count) => {
+        const baseTemplate = document.querySelector('#my-template')
+        const newTemplate = baseTemplate.cloneNode(true)
+        newTemplate.content.querySelector('span').textContent = count
+        return newTemplate.content
+    }
+</script>
