@@ -6,3 +6,5 @@ Materials for the web components workshop held at Refresh pre-event
 * [HTML Templates](/template-api.md)
 * [Putting the above two together](/putting-things-together.md)
 * [ShadowDOM](/shadow-dom.md)
+* [Composition and slots]()
+* [Inter-component communication]()
