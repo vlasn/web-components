@@ -1,0 +1,27 @@
+<template id="shady">
+    <div>
+        <h1>Be mindful of what lurks in the shadows.</h1>
+    </div>
+</template>
+
+<style>
+    h1 {
+        color: purple;
+    }
+</style>
+
+<script>
+    class Shady extends HTMLElement {
+        constructor () {
+            super ()
+            const importDoc = document.currentScript.ownerDocument
+            this.attachShadow({mode: 'open'})
+            // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
+            // in a separate variable and have access to it via `this`
+            this.shadowRoot.appendChild(importDoc.querySelector('style'))
+            const content = importDoc.querySelector('template#shady').content
+            this.shadowRoot.appendChild(content)
+        }
+    }
+    window.customElements.define('shady-element', Shady)
+</script>
