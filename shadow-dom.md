@@ -39,7 +39,7 @@ This is objectively awesome when paired with HTML templates and imports. See sam
 ```html
 <template id="shady">
     <div>
-        <h1>Be mindful of what lurks in the shadows.</h1>
+        <h1>Embrace the shadow.</h1>
     </div>
 </template>
 
