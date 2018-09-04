@@ -12,15 +12,17 @@ This is mostly examplified in the slide, but here's the custom element code:
 </template>
 
 <style>
-    .custom-counter {
+    :root {
         --counter-main-color: tomato;
+    }
+    .custom-counter {
         border: 1px solid var(--counter-main-color);
         padding: 10px;
         display: inline-flex;
         flex-direction: column;
     }
     .custom-counter:hover {
-        box-shadow: 0px 3px 2px -2px lightgray;\
+        box-shadow: 0px 3px 2px -2px lightgray;
     }
     .custom-counter__button {
         border: 2px solid var(--counter-main-color);
@@ -73,7 +75,6 @@ This is mostly examplified in the slide, but here's the custom element code:
     }
 )
 </script>
-
 ```
 We can stuff all this in `custom-counter.html`.
 
