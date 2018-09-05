@@ -11,9 +11,9 @@ class ShopContainer extends HTMLElement {
     }
     connectedCallback() {
         console.log('I was inserted into the DOM!')
-        this.innerHTML = '<b>test</b>'
+        this.innerHTML = '<b>test</b><shop-row></shop-row>'
     }
 }
 
 
-window.customElements.define('shopping-cart', ShopContainer)
+window.customElements.define('shopping-container', ShopContainer)
