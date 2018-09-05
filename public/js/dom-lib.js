@@ -1,4 +1,4 @@
-class Game{
+class Game {
   constructor (url = "https://refresh.dragonsofmugloar.com") {
     this.url = url
   }
