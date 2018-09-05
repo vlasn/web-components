@@ -33,8 +33,14 @@ const style = `
         font-size: 32px;
         line-height: 1.3;
         border-radius: 8px;
+        cursor: pointer;
     }
 `;
+
+const getAttributeValue = (attributes, curr) => {
+    const namedItem = attributes.getNamedItem(curr);
+    return namedItem && namedItem.value ? namedItem.value : '';
+};
 
 class Ad extends HTMLElement {
     constructor () {
@@ -46,16 +52,23 @@ class Ad extends HTMLElement {
         this.shadowRoot.appendChild(styleElement)
 
         const attrs = ['reward', 'status'].reduce((total, curr) => {
-            const namedItem = this.attributes.getNamedItem(curr);
-            total[curr] = namedItem && namedItem.value ? namedItem.value : '';
+            total[curr] = getAttributeValue(this.attributes, curr);
 
             return total;
         }, {});
 
         const content = document.createElement('div');
-        console.log('perse', attrs);
         content.innerHTML = generateContent(attrs);
         this.shadowRoot.appendChild(content);
+
+        this.shadowRoot.querySelector('button').addEventListener('click', e => {
+            this.dispatchEvent(new CustomEvent('kill', {
+                bubbles: true,
+                detail: {
+                    adId: getAttributeValue(this.attributes, 'adId')
+                }
+            }));
+        })
     }
     observedAttributes () {
         return ['adId', 'reward', 'status']
