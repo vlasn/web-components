@@ -1,6 +1,8 @@
 const template = `
 <div>
-    this is an ad
+    <slot>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, consequatur.
+    </slot>
 </div>
 `;
 
