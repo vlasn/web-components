@@ -28,7 +28,6 @@ class ShopRow extends HTMLElement {
     }
 
     setAttributeValue(cssSelector, attribute) {
-      console.log(importDoc.querySelector('template#shop-row').content.querySelector(cssSelector))
       const el = importDoc.querySelector('template#shop-row').content.querySelector(cssSelector)
       if (el) {
         el.innerHtml = this.getAttribute(attribute)
