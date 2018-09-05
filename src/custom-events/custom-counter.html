@@ -1,0 +1,71 @@
+<link rel="import" href="custom-button.html"/>
+
+<template id="counter-template">
+    <div class="custom-counter">
+        <custom-button>tere</custom-button>
+        <div class="custom-counter__text">
+            Count: <span id="counter-count" class="custom-counter__count">0</span>
+        </div>
+    </div>
+</template>
+    
+<style>
+    :root {
+        --counter-main-color: tomato;
+    }
+    .custom-counter {
+        border: 1px solid var(--counter-main-color);
+        padding: 10px;
+        display: inline-flex;
+        flex-direction: column;
+    }
+    .custom-counter:hover {
+        box-shadow: 0px 3px 2px -2px lightgray;
+    }
+    .custom-counter__button {
+        border: 2px solid var(--counter-main-color);
+        color: var(--counter-main-color);
+        background-color: transparent;
+        padding: 5px;    
+    }
+</style>
+
+<script>
+    window.customElements.define('custom-counter', 
+    class CustomCounter extends HTMLElement {
+        static get observedAttributes() {
+            return ['count']
+        }
+        constructor() {
+            super()
+            const thisDocument = document.currentScript.ownerDocument
+            const template = thisDocument.querySelector('#counter-template')
+            const content = template.content
+            this.attachShadow({mode: 'open'})
+            this.shadowRoot.appendChild(thisDocument.querySelector('style'))
+            this.shadowRoot.appendChild(document.importNode(content, true))
+
+            this.count = 0
+            if (this.hasAttribute('count')) {
+                this.count = this.getAttribute('count')
+            } else {
+                this.setAttribute('count', 0)
+            }
+            this.shadowRoot.querySelector('custom-button').addEventListener('hit', () => {
+                this.setAttribute('count', (parseInt(this.getAttribute('count'))+ 1) || 0) 
+                console.log(this.getAttribute('count'))
+            })
+        }
+        
+        attributeChangedCallback (attr, oldVal, newVal) {
+            if (attr === 'count') {
+                this.shadowRoot.querySelector('#counter-count').textContent = newVal
+            }
+        }
+        connectedCallback() {
+            console.log(`Custom counter, initialized with count ${this.count}, at your service!`)
+        }
+    }
+)
+</script>
+    

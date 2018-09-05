@@ -7,4 +7,4 @@ Materials for the web components workshop held at Refresh pre-event
 * [Putting the above two together](/putting-things-together.md)
 * [ShadowDOM](/shadow-dom.md)
 * [Slots and composing components](/slots-and-composition.md)
-* [Inter-component communication]()
+* [Inter-component communication](/custom-events-and-interchanging-data.md)

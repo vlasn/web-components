@@ -1,0 +1,28 @@
+<script>
+    window.customElements.define('custom-button',
+        class extends HTMLElement {
+            constructor () {
+                console.log('hi lol')
+                super()
+                this.attachShadow({mode: 'open'})
+                this.shadowRoot.innerHTML = `
+                    <button iamspecial>
+                        <slot></slot>
+                    </button>
+                `
+                this.emitCustomEvent = this.emitCustomEvent.bind(this)
+                this.shadowRoot.querySelector('[iamspecial]').addEventListener('click', this.emitCustomEvent)
+            }
+            emitCustomEvent (e) {
+                this.dispatchEvent(new CustomEvent('hit', {
+                    data: {
+                        herp: 'derp'
+                    },
+                    detail: {
+                        hi: 'mom'
+                    }
+                }))
+            }
+        }
+    )
+</script>
