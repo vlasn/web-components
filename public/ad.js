@@ -42,7 +42,7 @@ const style = `
     }
 
     .item.fail {
-        animation: failed .2s .2s infinite;
+        animation: failed .1s .2s infinite;
     }
     .item.fail button,
     .item.fail button {
@@ -53,33 +53,29 @@ const style = `
         from {
             background-color: #fff;
             box-shadow: none;
-            transform: scale(1);
         }
 
         to {
             background-color: #f00;
-            box-shadow: 10px 10px 100px 50px #f00;
+            box-shadow: 0 0 100px 50px #f00;
             outline: 5px solid #f00;
-            transform: rotate(180deg);
         }
     }
 
     .item.success {
-        animation: success .2s .2s infinite;
+        animation: success .1s .2s infinite;
     }
 
     @keyframes success {
         from {
             background-color: #fff;
             box-shadow: none;
-            transform: scale(1);
         }
 
         to {
             background-color: #0f0;
-            box-shadow: 10px 10px 100px 50px #0f0;
+            box-shadow: 0 0 100px 50px #0f0;
             outline: 5px solid #0f0;
-            transform: rotate(180deg);
         }
     }
 `;
