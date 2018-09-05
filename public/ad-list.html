@@ -1,3 +1,5 @@
+<script src="ad.js"></script>
+
 <style>
 </style>
 
@@ -19,12 +21,15 @@
                     title: "test2"
                 }
             ];
-            const content = this.mapAds();
-            this.shadowRoot.innerHTML = content;
+            this.shadowRoot.innerHTML = this.mapAds();
         }
 
         mapAds() {
-            return this.ads.map(ad => `<dragon-ad title="${ad.title}"></dragon-ad>`).join('');
+            return this.ads.map(ad => `<dragon-ad >${ad.title}</dragon-ad>`).join('');
+        }
+
+        getAds() {
+
         }
 
     }

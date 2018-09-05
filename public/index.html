@@ -11,15 +11,17 @@
         timer++
         if(timer > 10) { window.location.reload() }
       }, 1000)
+
+        const game = new Game();
     </script>
     <link rel="import" href="ad-list.html" />
-    <link rel="import" href="ad.html" />
     <link rel="import" href="investigation.html" />
     <link rel="import" href="shop/shop-container.html" />
 </head>
 <body>
 
 <h1>SOMEBODY IS HERE</h1>
+<dragon-investigation></dragon-investigation>
 <dragon-ad-list></dragon-ad-list>
 
 <shop-container></shop-container>

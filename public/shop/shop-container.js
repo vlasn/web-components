@@ -3,6 +3,8 @@ class ShopContainer extends HTMLElement {
         super()
         this.addEventListener('click', e => {
         })
+      
+      // test
     }
     get observedAttributes () {
         return ['disabled', 'expanded']
