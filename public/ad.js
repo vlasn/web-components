@@ -16,6 +16,7 @@ const style = `
         border-radius: 10px;
         padding: 20px;
         margin-bottom: 20px;
+        background-color: #fff;
     }
 
     h3 {
@@ -34,6 +35,8 @@ const style = `
         line-height: 1.3;
         border-radius: 8px;
         cursor: pointer;
+        width: 100%;
+        box-sizing: border-box;
     }
 `;
 
