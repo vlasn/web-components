@@ -45,10 +45,9 @@ class Ad extends HTMLElement {
         styleElement.innerHTML = style;
         this.shadowRoot.appendChild(styleElement)
 
-        console.log(this.attributes.getNamedItem('reward').value);
-
         const attrs = ['reward', 'status'].reduce((total, curr) => {
-            total[curr] = this.attributes.getNamedItem(curr).value;
+            const namedItem = this.attributes.getNamedItem(curr);
+            total[curr] = namedItem && namedItem.value ? namedItem.value : '';
 
             return total;
         }, {});
