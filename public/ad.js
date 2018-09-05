@@ -1,11 +1,11 @@
 const generateContent = ({ status, reward }) => `
     <div class="item ${status}">
-        <h3>Reward: ${reward}</h3>
+        <h3>Reward: 💰 ${reward} 💰</h3>
         <slot>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, consequatur.
         </slot>
         <div>
-            <button>KILL KILL KILL</button>
+            <button>🐉 KILL KILL KILL 🐉</button>
         </div>
     </div>
 `;
