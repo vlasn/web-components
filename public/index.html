@@ -10,11 +10,10 @@
 
       setInterval(() => {
         timer++
-        if(timer > 10) { window.location.reload() }
+        if(timer > 30) { window.location.reload() }
       }, 1000)
 
       window.game = new Game();
-      game.start()
     </script>
     <link rel="import" href="ad-list.html" />
     <link rel="import" href="/shop/shop-row.html" />
@@ -28,6 +27,9 @@
 <shopping-cart></shopping-cart>
 <dragon-investigation></dragon-investigation>
 <dragon-ad-list></dragon-ad-list>
+
+<img src="dragon.gif" style="position: fixed; right: 0; bottom: 0; transform: scaleX(-1)">
+<img src="dragon.gif" style="position: fixed; left: 0; bottom: 0;">
 
 </body>
 </html>
