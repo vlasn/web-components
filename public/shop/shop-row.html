@@ -1,6 +1,5 @@
 <template id="shop-row">
     <div class="shopping-row">
-        <div class="shopping-cell row-id"></div>
         <div class="shopping-cell row-name">No name?</div>
         <div class="shopping-cell row-cost"></div>
         <div class="shopping-cell row-buttons"><button class="shopping-cell-button">Buy 🛒</button></div>
@@ -10,7 +9,12 @@
             display:flex;
         }
         .shopping-cell {
-            flex:1 0 33.3%;
+            flex:1 0 auto;
+            max-width: 50%;
+        }
+        .row-buttons {
+            margin-left: auto;
+            text-align:right;
         }
     </style>
 </template>
@@ -30,7 +34,7 @@ class ShopRow extends HTMLElement {
     setAttributeValue(cssSelector, attribute) {
       const el = importDoc.querySelector('template#shop-row').content.querySelector(cssSelector)
       if (el) {
-        el.innerHtml = this.getAttribute(attribute)
+        el.innerHTML = this.getAttribute(attribute)
       }
     }
 

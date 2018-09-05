@@ -64,13 +64,14 @@
 
             setTimeout(() => {
                 el.remove();
-                this.ads = this.ads.filter(ad => id !== ad.adId);
                 this.fetchAndReplace();
+                this.ads = this.ads.filter(ad => id !== ad.adId);
             }, timeout)
         }
 
         async fetchAndReplace() {
             let messages = await this.getAds();
+            let currentMessagesIds = this.ads.map(ad => ad.adId);
 
             if (messages) {
                 this.shadowRoot.innerHTML = '';

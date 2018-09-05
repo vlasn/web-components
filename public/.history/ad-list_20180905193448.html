@@ -61,25 +61,20 @@
 
         removeElement(el, timeout = 2000) {
             const id = el.getAttribute('ad-id');
-
             setTimeout(() => {
                 el.remove();
                 this.ads = this.ads.filter(ad => id !== ad.adId);
-                this.fetchAndReplace();
             }, timeout)
         }
 
         async fetchAndReplace() {
             let messages = await this.getAds();
+            let currentMessagesIds = this.ads.map(ad => ad.adId);
 
             if (messages) {
-                this.shadowRoot.innerHTML = '';
-                messages.forEach(ad => {
-                    // this.shadowRoot.appendChild(el);
-                    console.log('New element added', ad);
-                    this.shadowRoot.innerHTML += this.handleAdd(ad);
-                    this.setListeners();
-                })
+                messages.filter(message => !currentMessagesIds.includes(message.adId))
+
+                console.log('newly fetched', messages);
             }
         }
 
