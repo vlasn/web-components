@@ -1,19 +1,23 @@
+const game = new Game();
+
 class ShopContainer extends HTMLElement {
     constructor() {
         super()
-        this.addEventListener('click', e => {
-        })
-      
-      // test
+        this.shadow = this.attachShadow({mode: 'open'})
+
     }
-    get observedAttributes () {
-        return ['disabled', 'expanded']
+
+    async getItems() {
+        this.server = await game.start();
+        // const items = server.getShopInventory();
     }
-    connectedCallback() {
-        console.log('I was inserted into the DOM!')
-        this.innerHTML = '<b>test</b><shop-row></shop-row>'
+
+    async connectedCallback() {
+        this.shadow.innerHTML =  `<section id="shopping-cart">
+                                    <shop-row></shop-row>
+                                  </section>`;
     }
 }
 
 
-window.customElements.define('shopping-container', ShopContainer)
+window.customElements.define('shopping-cart', ShopContainer)
