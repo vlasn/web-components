@@ -14,16 +14,14 @@
             this.shadowRoot.appendChild(importDoc.querySelector('style'))
             
             this.getAds()
-                .then((messages) => {
-                    console.log('Messages', messages);
-                    
-                    this.ads = messages;
-                    this.shadowRoot.innerHTML = this.mapAds();
-                });
+            .then((messages) => {
+                this.ads = messages;
+                this.shadowRoot.innerHTML = this.mapAds();
+            });
         }
 
         mapAds() {
-            return this.ads.map(ad => `<dragon-ad >${ad.message}</dragon-ad>`).join('');
+            return this.ads.map(ad => `<dragon-ad >${ad.title}</dragon-ad>`).join('');
         }
 
         async getAds() {
