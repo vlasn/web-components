@@ -1,6 +1,6 @@
 <template id="ad">
     <div>
-        Ad component comes here
+        this is an ad
     </div>
 </template>
 
@@ -13,12 +13,15 @@
             super ()
             const importDoc = document.currentScript.ownerDocument
             this.attachShadow({mode: 'open'})
-            // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
-            // in a separate variable and have access to it via `this`
             this.shadowRoot.appendChild(importDoc.querySelector('style'))
             const content = importDoc.querySelector('template#ad').content
             this.shadowRoot.appendChild(content)
         }
+        observedAttributes () {
+            return ['adId', 'reward', 'status']
+        }
     }
     window.customElements.define('dragon-ad', Ad)
 </script>
+
+<!-- <dragon-ad reward="1234">Plz save princess called "beautiful"</dragon-ad> !>
