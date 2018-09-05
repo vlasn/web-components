@@ -22,6 +22,7 @@ class ShopContainer extends HTMLElement {
               overflow:hidden;
               background-color:white;
               height:66px;
+              z-index:1;   
           }
           .shopping-title {
             padding-bottom:40px;
