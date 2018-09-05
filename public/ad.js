@@ -40,7 +40,7 @@ const style = `
     }
 
     .item.fail {
-        animation: failed .2s 0 infinite;
+        animation: failed .1s .1s infinite;
     }
 
     @keyframes failed {
@@ -54,7 +54,7 @@ const style = `
     }
 
     .item.success {
-        animation: success .2s 0 infinite;
+        animation: success .1s .1s infinite;
     }
 
     @keyframes success {
