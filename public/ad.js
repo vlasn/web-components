@@ -101,7 +101,7 @@ class Ad extends HTMLElement {
             }));
         })
     }
-    observedAttributes () {
+    static get observedAttributes () {
         return ['adId', 'reward', 'status']
     }
     attributeChangedCallback (attr, oldVal, newVal) {
