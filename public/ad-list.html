@@ -20,19 +20,28 @@
 
                     this.ads = messages;
                     this.shadowRoot.innerHTML = this.mapAds();
+                    this.setListeners();
                 });
         }
 
         mapAds() {
-            return this.ads.map(ad => `<dragon-ad ad-id="${ad.adId}" reward="${ad.reward}" status="${ad.status}" probability="${ad.probability}" >${ad.message}</dragon-ad>`).join('');
+            return this.ads.map(ad => `<dragon-ad ad-id="${ad.adId}" reward="${ad.reward}" probability="${ad.probability}" >${ad.message}</dragon-ad>`).join('');
+        }
+
+        setListeners() {
+            Array.from(this.shadowRoot.querySelectorAll('dragon-ad'))
+                .forEach(el => {
+                    el.addEventListener('click', () => this.handleAdClick(el))
+                })
+        }
+
+        async handleAdClick(el) {
+            const res = await window.game.solve(el.getAttribute('ad-id'));
+            el.setAttribute('status', res.success ? 'success' : 'fail');
         }
 
         async getAds() {
             return await window.game.getMessages();
-        }
-
-        handleStart() {
-
         }
 
     }
