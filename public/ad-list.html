@@ -31,17 +31,22 @@
         setListeners() {
             Array.from(this.shadowRoot.querySelectorAll('dragon-ad'))
                 .forEach(el => {
-                    el.addEventListener('click', () => this.handleAdClick(el))
+                    el.addEventListener('kill', () => this.handleAdClick(el))
                 })
         }
 
         async handleAdClick(el) {
+            console.log('kill!');
             const res = await window.game.solve(el.getAttribute('ad-id'));
             el.setAttribute('status', res.success ? 'success' : 'fail');
 
             this.dispatchEvent(new CustomEvent('solveEvent', {
                 detail: res
-            }))
+            }));
+
+            setTimeout(() => {
+                el.remove();
+            }, 2000)
         }
 
         async getAds() {
