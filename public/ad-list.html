@@ -21,7 +21,19 @@
                     title: "test2"
                 }
             ];
-            this.shadowRoot.innerHTML = this.mapAds();
+            this.shadowRoot.appendChild(this.render());
+        }
+
+        render() {
+            const button = document.createElement('button');
+            button.innerText = 'Start game';
+            button.addEventListener('click', this.handleStart);
+
+            const parent = document.createElement('div');
+            parent.appendChild(button);
+            parent.innerHTML += this.mapAds();
+
+            return parent;
         }
 
         mapAds() {
@@ -29,6 +41,10 @@
         }
 
         getAds() {
+
+        }
+
+        handleStart() {
 
         }
 
