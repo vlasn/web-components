@@ -1,16 +1,16 @@
-
 class ShopContainer extends HTMLElement {
-    constructor() {
-        super()
-        this.shadow = this.attachShadow({mode: 'open'})
-    }
+  constructor() {
+    super()
+    this.shadow = this.attachShadow({
+      mode: 'open'
+    })
+  }
 
-    async connectedCallback() {
-        await game.start();
-        
-        const items = await game.getShopInventory()
+  async connectedCallback() {
+    await game.start();
+    const items = await game.getShopInventory()
 
-        const style = `#shopping-cart {
+    const style = `#shopping-cart {
               position:fixed;
               top:20px;
               right:20px;
@@ -30,7 +30,7 @@ class ShopContainer extends HTMLElement {
                                   </section>
                                   <style>${style}</style>`;
 
-    }
+  }
 }
 
 
