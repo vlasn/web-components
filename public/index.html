@@ -11,9 +11,10 @@
         timer++
         if(timer > 10) { window.location.reload() }
       }, 1000)
+
+      window.game = new Game();
     </script>
     <link rel="import" href="ad-list.html" />
-    <link rel="import" href="ad.html" />
     <link rel="import" href="investigation.html" />
     <link rel="import" href="shop/shop-container.html" />
     <link rel="import" href="scoreboard/scoreboard.html" />
@@ -21,6 +22,7 @@
 <body>
 
 <h1>SOMEBODY IS HERE</h1>
+<dragon-investigation></dragon-investigation>
 <game-scoreboard></game-scoreboard>
 
 <dragon-ad-list></dragon-ad-list>
