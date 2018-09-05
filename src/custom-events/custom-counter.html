@@ -10,7 +10,7 @@
 </template>
     
 <style>
-    :root {
+    :host {
         --counter-main-color: tomato;
     }
     .custom-counter {
@@ -51,9 +51,9 @@
             } else {
                 this.setAttribute('count', 0)
             }
-            this.shadowRoot.querySelector('custom-button').addEventListener('hit', () => {
+            this.shadowRoot.querySelector('custom-button').addEventListener('hit', e => {
+                console.log(e)
                 this.setAttribute('count', (parseInt(this.getAttribute('count'))+ 1) || 0) 
-                console.log(this.getAttribute('count'))
             })
         }
         
