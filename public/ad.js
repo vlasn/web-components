@@ -107,11 +107,17 @@ class Ad extends HTMLElement {
     attributeChangedCallback (attr, oldVal, newVal) {
         if (attr === 'status') {
             const item = this.shadowRoot.querySelector('.item');
+            let audio;
+
             if (newVal === 'success') {
                 item.classList.add('success');
+                audio = new Audio('success.mp3');
             } else {
                 item.classList.add('fail');
+                audio = new Audio('fail.mp3');
             }
+
+            audio.play();
         }
     }
 }
