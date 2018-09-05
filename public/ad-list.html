@@ -25,7 +25,7 @@
         }
 
         mapAds() {
-            return this.ads.map(ad => `<dragon-ad ad-id="${ad.adId}" reward="${ad.reward}" probability="${ad.probability}" >${ad.message}</dragon-ad>`).join('');
+            return this.ads.map(ad => `<dragon-ad ad-id="${ad.adId}" reward="${ad.reward}" probability="${ad.probability}" status="" >${ad.message}</dragon-ad>`).join('');
         }
 
         setListeners() {

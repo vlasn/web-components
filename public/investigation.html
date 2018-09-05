@@ -19,9 +19,11 @@
             const content = investigationDoc.querySelector('#investigation').content;
             this.shadowRoot.appendChild(content);
 
+            this.list = this.shadowRoot.querySelector('dragon-investigation-list');
+
             this.shadowRoot.addEventListener('investigate', e => {
                 game.investigateReputation().then(response => {
-                    console.log(response)
+                    this.list.itemsList = response;
                 });
             });
         }
