@@ -1,0 +1,23 @@
+<template id="score-board">
+  <div>
+    <h1>scoreboard goes here</h1>
+  </div>
+</template>
+
+<style></style>
+
+<script>
+  class Scoreboard extends HTMLElement {
+    constructor () {
+      super ()
+      const importDoc = document.currentScript.ownerDocument
+      this.attachShadow({mode: 'open'})
+      // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
+      // in a separate variable and have access to it via `this`
+      this.shadowRoot.appendChild(importDoc.querySelector('style'))
+      const content = importDoc.querySelector('template#score-board').content
+      this.shadowRoot.appendChild(content)
+    }
+  }
+  window.customElements.define('game-scoreboard', Scoreboard)
+</script>
