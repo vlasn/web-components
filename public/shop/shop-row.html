@@ -20,7 +20,6 @@ class ShopRow extends HTMLElement {
         // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
         // in a separate variable and have access to it via `this`
         const content = importDoc.querySelector('template#shop-row').content
-        content.querySelector(".row-name").innerHTML = this.getAttribute('name')
         content.querySelector(".row-cost").innerHTML = this.getAttribute('cost')
         content.querySelector(".row-id").innerHTML = this.getAttribute('id')
         this.shadowRoot.appendChild(content)
