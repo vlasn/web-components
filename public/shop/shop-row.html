@@ -1,10 +1,18 @@
 <template id="shop-row">
-    <tr>
-        <td class="row-id"></td>
-        <td class="row-name">No name?</td>
-        <td class="row-cost"></td>
-        <td class="row-buttons"></td>
-    </tr>
+    <div class="shopping-row">
+        <div class="shopping-cell row-id"></div>
+        <div class="shopping-cell row-name">No name?</div>
+        <div class="shopping-cell row-cost"></div>
+        <div class="shopping-cell row-buttons"></div>
+    </div>
+    <style>
+        .shopping-row {
+            display:flex;
+        }
+        .shopping-cell {
+            flex:1 0 33.3%;
+        }
+    </style>
 </template>
 
 <style>
@@ -20,7 +28,6 @@ class ShopRow extends HTMLElement {
         // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
         // in a separate variable and have access to it via `this`
         const content = importDoc.querySelector('template#shop-row').content
-        content.querySelector(".row-name").innerHTML = this.getAttribute('name')
         content.querySelector(".row-cost").innerHTML = this.getAttribute('cost')
         content.querySelector(".row-id").innerHTML = this.getAttribute('id')
         this.shadowRoot.appendChild(content)
