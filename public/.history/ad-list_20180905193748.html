@@ -77,11 +77,9 @@
             if (messages) {
                 const newMessages = messages.filter(message => !currentMessagesIds.includes(message.adId))
 
-                newMessages.forEach(ad => {
+                newMessages.forEach(el => {
                     // this.shadowRoot.appendChild(el);
-                    console.log('New element added', ad);
-                    this.shadowRoot.innerHTML += this.handleAdd(ad);
-                    this.setListeners();
+                    console.log('New element added', el);
                 })
             }
         }
