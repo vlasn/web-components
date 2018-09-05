@@ -13,7 +13,6 @@ const generateContent = ({ status, reward }) => `
 const style = `
     .item {
         border: 1px solid #000;
-        border-radius: 10px;
         padding: 20px;
         margin-bottom: 20px;
         background-color: #fff;
@@ -45,14 +44,23 @@ const style = `
     .item.fail {
         animation: failed .2s .2s infinite;
     }
+    .item.fail button,
+    .item.fail button {
+        pointer-events: none
+    }
 
     @keyframes failed {
         from {
             background-color: #fff;
+            box-shadow: none;
+            transform: scale(1);
         }
 
         to {
             background-color: #f00;
+            box-shadow: 10px 10px 100px 50px #f00;
+            outline: 5px solid #f00;
+            transform: scale(5);
         }
     }
 
@@ -63,10 +71,15 @@ const style = `
     @keyframes success {
         from {
             background-color: #fff;
+            box-shadow: none;
+            transform: scale(1);
         }
 
         to {
             background-color: #0f0;
+            box-shadow: 10px 10px 100px 50px #0f0;
+            outline: 5px solid #0f0;
+            transform: scale(5);
         }
     }
 `;
