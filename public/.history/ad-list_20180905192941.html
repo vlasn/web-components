@@ -36,54 +36,27 @@
         setListeners() {
             Array.from(this.shadowRoot.querySelectorAll('dragon-ad'))
                 .forEach(el => {
+                    el.addEventListener('kill', () => this.handleAdClick(el))
+
                     this.setListener(el.getAttribute('ad-id'));
                 })
         }
 
         setListener(adId) {
             const element = this.shadowRoot.querySelectorAll(`dragon-ad[ad-id="${adId}"]`)[0];
-
+            
             element.addEventListener('kill', () => this.handleAdClick(element))
         }
 
         async handleAdClick(el) {
-            console.log('kill!');
-            const id = el.getAttribute('ad-id');
-            const res = await window.game.solve(id);
+            const res = await window.game.solve(el.getAttribute('ad-id'));
             el.setAttribute('status', res.success ? 'success' : 'fail');
 
             this.dispatchEvent(new CustomEvent('solveEvent', {
                 detail: res
             }));
 
-            this.removeElement(el);
-        }
-
-        removeElement(el, timeout = 2000) {
-            const id = el.getAttribute('ad-id');
-            
-            this.fetchAndReplace();
-
-            setTimeout(() => {
-                el.remove();
-                this.ads = this.ads.filter(ad => id !== ad.adId);
-            }, timeout)
-        }
-
-        async fetchAndReplace() {
-            let messages = await this.getAds();
-            let currentMessagesIds = this.ads.map(ad => ad.adId);
-
-            if (messages) {
-                const newMessages = messages.filter(message => !currentMessagesIds.includes(message.adId))
-
-                newMessages.forEach(ad => {
-                    // this.shadowRoot.appendChild(el);
-                    console.log('New element added', ad);
-                    this.shadowRoot.innerHTML += this.handleAdd(ad);
-                    this.setListeners();
-                })
-            }
+            setTimeout(el.remove, 2000)
         }
 
         async getAds() {

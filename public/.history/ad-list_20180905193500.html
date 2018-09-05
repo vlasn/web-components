@@ -75,14 +75,9 @@
             let currentMessagesIds = this.ads.map(ad => ad.adId);
 
             if (messages) {
-                const newMessages = messages.filter(message => !currentMessagesIds.includes(message.adId))
+                messages.filter(message => !currentMessagesIds.includes(message.adId))
 
-                newMessages.forEach(ad => {
-                    // this.shadowRoot.appendChild(el);
-                    console.log('New element added', ad);
-                    this.shadowRoot.innerHTML += this.handleAdd(ad);
-                    this.setListeners();
-                })
+                console.log('newly fetched', messages);
             }
         }
 
