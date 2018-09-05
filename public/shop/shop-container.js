@@ -1,15 +1,30 @@
+
+const template = `<template>
+                    <section id="shopping-cart">
+                      <slot name="shopping-items"></slot>
+                    </section>
+                  </template>`;
+
+
+const game = new Game();
+
+
 class ShopContainer extends HTMLElement {
     constructor() {
         super()
-        this.addEventListener('click', e => {
-        })
+        this.shadow = this.attachShadow({mode: 'open'})
+
     }
-    get observedAttributes () {
-        return ['disabled', 'expanded']
+
+    async getItems() {
+        this.server = await game.start();
+        // const items = server.getShopInventory();
+        console.log(awaitthis.server);
     }
-    connectedCallback() {
-        console.log('I was inserted into the DOM!')
-        this.innerHTML = '<b>test</b>'
+
+    async connectedCallback() {
+        this.getItems();
+        this.shadow.innerHTML = '<b>test</b>'
     }
 }
 
