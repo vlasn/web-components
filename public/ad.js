@@ -1,5 +1,5 @@
 const generateContent = () => `
-    <div>
+    <div class="item">
         <slot>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, consequatur.
         </slot>
@@ -27,6 +27,15 @@ class Ad extends HTMLElement {
     }
     observedAttributes () {
         return ['adId', 'reward', 'status']
+    }
+    attributeChangedCallback (attr, oldVal, newVal) {
+        if (attr === 'status') {
+            if (newVal === 'success') {
+                this.shadowRoot.querySelector('.item').classList.add('success');
+            } else {
+                this.shadowRoot.querySelector('.item').classList.add('fail');
+            }
+        }
     }
 }
 window.customElements.define('dragon-ad', Ad)
