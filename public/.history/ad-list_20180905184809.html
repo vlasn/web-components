@@ -13,15 +13,15 @@
             // in a separate variable and have access to it via `this`
             this.shadowRoot.appendChild(importDoc.querySelector('style'))
             
-            this.getAds()
-                .then((messages) => {
-                    this.ads = messages;
-                    this.shadowRoot.innerHTML = this.mapAds();
-                });
+            this.ads = this.getAds()
+
+            console.log('Adsid on', this.ads);
+
+            this.shadowRoot.innerHTML = this.mapAds();
         }
 
         mapAds() {
-            return this.ads.map(ad => `<dragon-ad >${ad.message}</dragon-ad>`).join('');
+            return this.ads.map(ad => `<dragon-ad >${ad.title}</dragon-ad>`).join('');
         }
 
         async getAds() {

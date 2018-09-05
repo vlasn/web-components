@@ -13,23 +13,27 @@
             // in a separate variable and have access to it via `this`
             this.shadowRoot.appendChild(importDoc.querySelector('style'))
             
-            this.getAds()
-                .then((messages) => {
-                    this.ads = messages;
-                    this.shadowRoot.innerHTML = this.mapAds();
-                });
+            this.game = null;
+
+            this.handleStart();
+            this.shadowRoot.appendChild(this.render());
+        }
+        
+        async mapAds() {
+            const messages = await this.game.getMessages();
+
+            console.log(messages);
+
+            return messages && messages.map(ad => `<dragon-ad >${ad.title}</dragon-ad>`).join('');
         }
 
-        mapAds() {
-            return this.ads.map(ad => `<dragon-ad >${ad.message}</dragon-ad>`).join('');
+        getAds() {
+
         }
 
-        async getAds() {
-            return await window.game.getMessages();
-        }
-
-        handleStart() {
-
+        async handleStart() {
+            this.game = window.game;
+            this.start = await window.game.start();
         }
 
     }

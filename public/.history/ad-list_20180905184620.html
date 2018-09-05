@@ -12,16 +12,23 @@
             // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
             // in a separate variable and have access to it via `this`
             this.shadowRoot.appendChild(importDoc.querySelector('style'))
+
+            this.ads = [
+                {
+                    title: "test1"
+                },
+                {
+                    title: "test2"
+                }
+            ];
             
-            this.getAds()
-                .then((messages) => {
-                    this.ads = messages;
-                    this.shadowRoot.innerHTML = this.mapAds();
-                });
+            this.ads = awaitwindow.game.getMessages
+
+            this.shadowRoot.innerHTML = this.mapAds();
         }
 
         mapAds() {
-            return this.ads.map(ad => `<dragon-ad >${ad.message}</dragon-ad>`).join('');
+            return this.ads.map(ad => `<dragon-ad >${ad.title}</dragon-ad>`).join('');
         }
 
         async getAds() {
