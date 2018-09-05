@@ -17,7 +17,7 @@ class ShopContainer extends HTMLElement {
         const items = await this.getItems()
         console.log('shop items', items)
         this.shadow.innerHTML =  `<section id="shopping-cart">
-                                    <shop-row></shop-row>
+                                    ${items.map(item => `<shop-row name=${item.name}></shop-row>`).join("")}
                                   </section>`;
     }
 }
