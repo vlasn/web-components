@@ -42,7 +42,9 @@
 
             this.dispatchEvent(new CustomEvent('solveEvent', {
                 detail: res
-            }))
+            }));
+
+            setTimeout(el.remove, 2000)
         }
 
         async getAds() {
