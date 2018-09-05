@@ -53,12 +53,14 @@ const style = `
         from {
             background-color: #fff;
             box-shadow: none;
+            transform: scale(1);
         }
 
         to {
             background-color: #f00;
             box-shadow: 10px 10px 100px 50px #f00;
             outline: 5px solid #f00;
+            transform: scale(5);
         }
     }
 
@@ -70,12 +72,14 @@ const style = `
         from {
             background-color: #fff;
             box-shadow: none;
+            transform: scale(1);
         }
 
         to {
             background-color: #0f0;
             box-shadow: 10px 10px 100px 50px #0f0;
             outline: 5px solid #0f0;
+            transform: scale(5);
         }
     }
 `;
