@@ -15,13 +15,8 @@ class ShopContainer extends HTMLElement {
               top:20px;
               right:20px;
               box-shadow: 0 0 3px #ccc;
+              width:330px;
           }
-            .shopping-table {
-                display:flex;
-            }
-            .shopping-table shop-row {
-                flex:1 0 33.3%;
-            }
           `
         console.log('shop items', items)
         this.shadow.innerHTML =  `<section id="shopping-cart">
