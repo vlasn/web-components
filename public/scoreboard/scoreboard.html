@@ -56,16 +56,24 @@
       this.shadowRoot.appendChild(importDoc.querySelector('style'));
       const content = importDoc.querySelector('template#score-board').content;
       this.shadowRoot.appendChild(content);
-      //this.updateState();
+      this.updateState({
+        data: [
+          {score: 0},
+          {gold: 0},
+          {lives: 3},
+          {turns: 0}
+        ]
+      });
     }
 
     updateState(event) {
-      const scoreboardData = event.data;
+      console.log('event:', event);
+      const scoreboardData = event.detail.data;
       this.setGameId(window.game.gameId || '0000');
-      this.setScore(scoreboardData.score);
-      this.setGold(scoreboardData.gold);
-      this.setLives(scoreboardData.lives);
-      this.setTurns(scoreboardData.turns);
+      this.setScore(scoreboardData.score || '0');
+      this.setGold(scoreboardData.gold || '0');
+      this.setLives(scoreboardData.lives || '0');
+      this.setTurns(scoreboardData.turns || '0');
     }
 
     connectedCallback() {
@@ -77,6 +85,7 @@
       });
       this.solveListener = window.addEventListener('solveEvent', e => {
         console.log('solveEvent:', e);
+        this.updateState(e);
       });
     }
 
