@@ -1,21 +1,22 @@
 <template id="score-board">
   <div class="score-board">
-    <h2>🎮Game🎮 #<span id="game">0</span></h2>
+    <div class="char"></div>
+    <h2>🎮Game #<span id="game">0</span></h2>
     <div class="score-fileds">
       <div class="field">
-        <strong>💰Gold💰</strong>
+        <strong>💰Gold</strong>
         <span id="gold">0</span>
       </div>
       <div class="field">
-        <strong>❤️Life❤️</strong>
+        <strong>❤️Life</strong>
         <span id="life">0</span>
       </div>
       <div class="field">
-        <strong>🏆Score🏆</strong>
+        <strong>🏆Score</strong>
         <span id="score">0</span>
       </div>
       <div class="field">
-        <strong>📌Turn📌</strong>
+        <strong>📌Turn</strong>
         <span id="turn">0</span>
       </div>
     </div>
@@ -32,6 +33,14 @@
     border-radius: 20px;
     padding: 20px 30px;
   }
+  .char {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    background: url(scoreboard/img/toothless.png) no-repeat #8646c5;
+    background-size: cover;
+    background-position: center center;
+  }
   h2 {
     margin: 0 0 20px 0;
     border-bottom: 2px dotted;
@@ -40,7 +49,19 @@
 
   }
   .field {
-
+    background: #000;
+    margin: 5px 0;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    line-height: 30px;
+  }
+  .field strong, .field span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .field span {
+    float:right;
   }
 
 </style>
