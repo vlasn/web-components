@@ -38,6 +38,10 @@
         async handleAdClick(el) {
             const res = await window.game.solve(el.getAttribute('ad-id'));
             el.setAttribute('status', res.success ? 'success' : 'fail');
+
+            this.dispatchEvent(new CustomEvent('solveEvent', {
+                detail: res
+            }))
         }
 
         async getAds() {
