@@ -1,0 +1,95 @@
+<template id="profile-card">
+    <div class="card">
+        <!-- Here we have a named slot with content to fall back to in case the consumer does not pass it anything -->
+        <div class="image">
+                <slot name="image">
+                    <img src="profile-picture.png" class="card-image">
+                </slot>
+        </div>
+        <div class="name">
+            <!-- Here's a named slot without fallback content -->
+            <slot name="name"> </slot>
+        </div>
+        <div class="description">
+            <!-- Here's the "default slot" - this falls back to elements children. Only first default slot will be used. -->
+            <slot>
+                This user has not written anything about themselves. For now.
+            </slot>
+        </div>
+    </div>
+</template>
+
+<style>
+    /*
+        :root {
+            Here, you can style the component the webcomponent will be mounted in.
+        }    
+        :host {
+            ..and :host(:hover), :host([disabled]) or other selectors target shadow-host and allow encapsulation of style corresponding to state (expressed by props).
+            For example, if we want the component to be transparent when the disabled attribute is set, we can
+            :host([disabled]) {
+                opacity: 0.7;
+            }
+        }
+        :host-context(selector) will match if *ANY* of its ancestors matches selector. If you were to assign a "theme" class to document body and use a webcomponent somewhere in the body, you can match with
+        :host-context(.my-awesome-theme) {
+            background-color: purple;
+        }
+
+        ::slotted(selector) can be used to match nodes that have been populated into a slot, eg. you can override slot fonts with
+
+        .description::slotted(*) {
+            font-family: Roboto arial;
+        }
+    */
+    
+    .card {
+        border: 1px solid gray;
+        display: inline-grid;
+        padding: 20px;
+        width: 400px;
+        grid-template-areas: 
+        "pic         name        name"
+        "pic         name        name"
+        "description description description"
+    }
+    .image {
+        grid-area: pic;
+    }
+    img {
+        --img-size: 150px;
+        max-width: var(--img-size);
+        max-height: var(--img-size);
+    }
+    .name {
+        grid-area: name;
+        font-size: 2em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .description {
+        padding-top: 20px;
+        grid-area: description;
+    }
+</style>
+
+<script>
+    class ProfileCard extends HTMLElement {
+        constructor () {
+            super ()
+            this.attachShadow({mode: 'open'})
+            this.doc = document.currentScript.ownerDocument
+            const style = this.doc.querySelector('style')
+            const content = this.doc.querySelector('template#profile-card').content
+            console.log(this.doc)
+            this.shadowRoot.appendChild(document.importNode(style, true))
+            this.shadowRoot.appendChild(document.importNode(content, true))
+        }
+    }
+
+    window.customElements.define('profile-card', ProfileCard);
+    window.customElements.whenDefined('profile-card').then(e => {
+        console.log('profile-card has been defined and is ready to use!')
+    })
+</script>
