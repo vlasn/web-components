@@ -1,23 +1,30 @@
 <template id="investigation">
-    <button type="button">
-        Investigate
-    </button>
+    <div class="investigate">
+        <dragon-investigation-button></dragon-investigation-button>
+        <dragon-investigation-list></dragon-investigation-list>
+    </div>
 </template>
 
 <style></style>
 
 <script>
+    const investigationDoc = document.currentScript.ownerDocument;
+
     class Investigation extends HTMLElement {
         constructor() {
             super();
 
-            const importDoc = document.currentScript.ownerDocument;
             this.attachShadow({ mode: 'open' });
-            this.shadowRoot.appendChild(importDoc.querySelector('style'));
-            const content = importDoc.querySelector('#investigation').content;
+            this.shadowRoot.appendChild(investigationDoc.querySelector('style'));
+            const content = investigationDoc.querySelector('#investigation').content;
             this.shadowRoot.appendChild(content);
-        }
 
+            this.shadowRoot.addEventListener('investigate', e => {
+                game.investigateReputation().then(response => {
+                    console.log(response)
+                });
+            });
+        }
     }
     window.customElements.define('dragon-investigation', Investigation);
 </script>

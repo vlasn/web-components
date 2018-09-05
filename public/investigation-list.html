@@ -1,0 +1,23 @@
+<template id="investigationList">
+    <ul class="investigation-list"></ul>
+</template>
+
+<style></style>
+
+<script>
+    const investigationListDoc = document.currentScript.ownerDocument;
+
+    class InvestigationList extends HTMLElement {
+        constructor() {
+            super();
+
+            this.attachShadow({ mode: 'open' });
+            this.shadowRoot.appendChild(investigationListDoc.querySelector('style'));
+            const content = investigationListDoc.querySelector('#investigationList').content;
+            this.shadowRoot.appendChild(content);
+
+
+        }
+    }
+    window.customElements.define('dragon-investigation-list', InvestigationList);
+</script>
