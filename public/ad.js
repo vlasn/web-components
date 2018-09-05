@@ -1,9 +1,9 @@
-const template = `
-<div>
-    <slot>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, consequatur.
-    </slot>
-</div>
+const generateContent = () => `
+    <div>
+        <slot>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, consequatur.
+        </slot>
+    </div>
 `;
 
 const style = `
@@ -21,9 +21,9 @@ class Ad extends HTMLElement {
         styleElement.innerHTML = style;
         this.shadowRoot.appendChild(styleElement)
 
-        const templateElement = document.createElement('template');
-        templateElement.innerHTML = template;
-        this.shadowRoot.appendChild(document.importNode(templateElement.content, true))
+        const content = document.createElement('div');
+        content.innerHTML = generateContent();
+        this.shadowRoot.appendChild(content);
     }
     observedAttributes () {
         return ['adId', 'reward', 'status']
