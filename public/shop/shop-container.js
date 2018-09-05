@@ -21,14 +21,17 @@ class ShopContainer extends HTMLElement {
               padding:20px;
               overflow:hidden;
               background-color:white;
-              height:66px;
-              z-index:1;   
+              max-height:66px;
+              z-index:1;  
+              transition:all 0.3s ease-out .3s;
           }
           .shopping-title {
             padding-bottom:40px;
           }
           #shopping-cart:hover {
-            height:auto;
+            max-height:500px;
+            overflow:auto;
+            transition:all 0.3s ease-out;
           }
           `
         console.log('shop items', items)
