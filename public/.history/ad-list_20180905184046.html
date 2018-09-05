@@ -1,0 +1,60 @@
+<script src="ad.js"></script>
+
+<style>
+</style>
+
+<script>
+    class AdList extends HTMLElement {
+        constructor () {
+            super ()
+            const importDoc = document.currentScript.ownerDocument
+            this.attachShadow({mode: 'open'})
+            // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
+            // in a separate variable and have access to it via `this`
+            this.shadowRoot.appendChild(importDoc.querySelector('style'))
+            
+            this.game = null;
+            this.ads = [
+                {
+                    title: "test1"
+                },
+                {
+                    title: "test2"
+                }
+            ];
+
+            this.handleStart();
+            this.shadowRoot.appendChild(this.render());
+        }
+
+        render() {
+            const button = document.createElement('button');
+            button.innerText = 'Start game';
+            button.addEventListener('click', this.handleStart);
+            
+            console.log(game);
+                
+            const parent = document.createElement('div');
+            parent.appendChild(button);
+            parent.innerHTML += this.mapAds();
+
+            return parent;
+        }
+
+        mapAds() {
+            return this.ads.map(ad => `<dragon-ad >${ad.title}</dragon-ad>`).join('');
+        }
+
+        getAds() {
+
+        }
+
+        async handleStart() {
+            this.game = await window.game.start();
+
+            console.log('trolo', this.game);
+        }
+
+    }
+    window.customElements.define('dragon-ad-list', AdList)
+</script>

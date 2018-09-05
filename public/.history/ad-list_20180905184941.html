@@ -12,19 +12,16 @@
             // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
             // in a separate variable and have access to it via `this`
             this.shadowRoot.appendChild(importDoc.querySelector('style'))
-
-            game.start()
-                .then(this.getAds)
-                .then((messages) => {
-                    console.log('Messages', messages);
-
-                    this.ads = messages;
-                    this.shadowRoot.innerHTML = this.mapAds();
-                });
+            
+            this.getAds()
+            .then((messages) => {
+                this.ads = messages;
+                this.shadowRoot.innerHTML = this.mapAds();
+            });
         }
 
         mapAds() {
-            return this.ads.map(ad => `<dragon-ad ad-id="${ad.adId}" reward="${ad.reward}" status="${ad.status}" probability="${ad.probability}" >${ad.message}</dragon-ad>`).join('');
+            return this.ads.map(ad => `<dragon-ad >${ad.message}</dragon-ad>`).join('');
         }
 
         async getAds() {
@@ -38,4 +35,3 @@
     }
     window.customElements.define('dragon-ad-list', AdList)
 </script>
-

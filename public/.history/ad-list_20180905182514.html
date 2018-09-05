@@ -1,0 +1,35 @@
+<style>
+</style>
+
+<script>
+    class AdList extends HTMLElement {
+        constructor () {
+            super ()
+            const importDoc = document.currentScript.ownerDocument
+            this.attachShadow({mode: 'open'})
+            // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
+            // in a separate variable and have access to it via `this`
+            this.shadowRoot.appendChild(importDoc.querySelector('style'))
+
+            this.ads = [
+                {
+                    title: "test1"
+                },
+                {
+                    title: "test2"
+                }
+            ];
+            const content = this.mapAds();
+            this.shadowRoot.innerHTML = content;
+
+            console.log(this.start)
+
+        }
+
+        mapAds() {
+            return this.ads.map(ad => `<dragon-ad title="${ad.title}"></dragon-ad>`).join('');
+        }
+
+    }
+    window.customElements.define('dragon-ad-list', AdList)
+</script>
