@@ -19,12 +19,10 @@ class ShopContainer extends HTMLElement {
     async getItems() {
         this.server = await game.start();
         // const items = server.getShopInventory();
-        console.log(awaitthis.server);
     }
 
     async connectedCallback() {
-        this.getItems();
-        this.shadow.innerHTML = '<b>test</b>'
+        this.shadow.innerHTML = '<b>Cart</b>'
     }
 }
 
