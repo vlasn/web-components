@@ -75,10 +75,11 @@ class Ad extends HTMLElement {
     }
     attributeChangedCallback (attr, oldVal, newVal) {
         if (attr === 'status') {
+            const item = this.shadowRoot.querySelector('.item');
             if (newVal === 'success') {
-                this.shadowRoot.querySelector('.item').classList.add('success');
+                item.classList.add('success');
             } else {
-                this.shadowRoot.querySelector('.item').classList.add('fail');
+                item.classList.add('fail');
             }
         }
     }
