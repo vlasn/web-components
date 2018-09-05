@@ -9,19 +9,15 @@
 <script>
     const investigationDoc = document.currentScript.ownerDocument;
 
-    (async () => {
-        const gameObject = await window.game.start();
+    class Investigation extends HTMLElement {
+        constructor() {
+            super();
 
-        class Investigation extends HTMLElement {
-            constructor() {
-                super();
-
-                this.attachShadow({ mode: 'open' });
-                this.shadowRoot.appendChild(investigationDoc.querySelector('style'));
-                const content = investigationDoc.querySelector('#investigation').content;
-                this.shadowRoot.appendChild(content);
-            }
+            this.attachShadow({ mode: 'open' });
+            this.shadowRoot.appendChild(investigationDoc.querySelector('style'));
+            const content = investigationDoc.querySelector('#investigation').content;
+            this.shadowRoot.appendChild(content);
         }
-        window.customElements.define('dragon-investigation', Investigation);
-    })();
+    }
+    window.customElements.define('dragon-investigation', Investigation);
 </script>
