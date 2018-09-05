@@ -3,11 +3,21 @@
 <head>
     <title>Dragon mess</title>
     <script src="js/dom-lib.js"></script>
+    <script>
+      let timer = 0;
+      document.addEventListener("mousemove", () => {timer = 0})
+
+      setInterval(() => {
+        timer++
+        if(timer > 10) { window.location.reload() }
+      }, 1000)
+    </script>
+    <link rel="import" href="ad.html" />
 </head>
 <body>
 
 <h1>NOBODY IS HERE</h1>
-
+<dragon-ad></dragon-ad>
 
 </body>
 </html>
