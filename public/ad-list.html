@@ -37,15 +37,18 @@
 
         async handleAdClick(el) {
             console.log('kill!');
-            const res = await window.game.solve(el.getAttribute('ad-id'));
+            const id = el.getAttribute('ad-id');
+            const res = await window.game.solve(id);
             el.setAttribute('status', res.success ? 'success' : 'fail');
 
             this.dispatchEvent(new CustomEvent('solveEvent', {
                 detail: res
             }));
 
+
             setTimeout(() => {
                 el.remove();
+                this.ads = this.ads.filter(ad => id !== ad.id);
             }, 2000)
         }
 
