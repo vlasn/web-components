@@ -1,20 +1,23 @@
-const game = new Game();
 
 class ShopContainer extends HTMLElement {
     constructor() {
         super()
+        this.game = new Game();
         this.shadow = this.attachShadow({mode: 'open'})
 
     }
 
     async getItems() {
-        this.server = await game.start();
-        // const items = server.getShopInventory();
+        await this.game.start();
+        return await this.game.getShopInventory();
     }
 
     async connectedCallback() {
+
+        const items = await this.getItems()
+        console.log('shop items', items)
         this.shadow.innerHTML =  `<section id="shopping-cart">
-                                    <shop-row></shop-row>
+                                    ${items.map(item => `<shop-row id=${item.id} name=${item.name} cost=${item.cost} ></shop-row>`).join("")}
                                   </section>`;
     }
 }
