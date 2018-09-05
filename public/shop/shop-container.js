@@ -18,7 +18,17 @@ class ShopContainer extends HTMLElement {
         console.log('shop items', items)
         this.shadow.innerHTML =  `<section id="shopping-cart">
                                     <shop-row></shop-row>
-                                  </section>`;
+                                  </section>
+                                  <style>
+                                      #shopping-cart {
+                                          position:fixed; 
+                                          top:20px; 
+                                          right:20px; 
+                                          box-shadow: 0 0 3px #ccc;
+                                      }
+
+                                  </style>
+                                  `;
     }
 }
 
