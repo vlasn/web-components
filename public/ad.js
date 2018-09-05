@@ -16,6 +16,7 @@ const style = `
         border-radius: 10px;
         padding: 20px;
         margin-bottom: 20px;
+        background-color: #fff;
     }
 
     h3 {
@@ -34,6 +35,8 @@ const style = `
         line-height: 1.3;
         border-radius: 8px;
         cursor: pointer;
+        width: 100%;
+        box-sizing: border-box;
     }
 `;
 
@@ -75,10 +78,11 @@ class Ad extends HTMLElement {
     }
     attributeChangedCallback (attr, oldVal, newVal) {
         if (attr === 'status') {
+            const item = this.shadowRoot.querySelector('.item');
             if (newVal === 'success') {
-                this.shadowRoot.querySelector('.item').classList.add('success');
+                item.classList.add('success');
             } else {
-                this.shadowRoot.querySelector('.item').classList.add('fail');
+                item.classList.add('fail');
             }
         }
     }
