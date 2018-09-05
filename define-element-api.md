@@ -55,6 +55,14 @@ We can register this element to the DOM as follows:
 window.customElements.define('my-component', MyElement)
 ```
 
+...and react to elements becoming defined:
+
+```javascript
+window.customElements.whenDefined('my-component').then(() => {
+    console.log('A 🐢 has made it to the 🌊 !')
+})
+```
+
 Notes: 
 * A custom element's name *must* contain a dash - `<round-banana>` is valid, `<square_apple>` or `<smalldogs>` is not
 * Registering a tag with the same name more than once throws a DOMException. No take-backsies

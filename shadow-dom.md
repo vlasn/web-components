@@ -14,7 +14,7 @@ shadowRoot.innerHTML = '<h1>Hello Shadow DOM</h1>'; // Could also use appendChil
 // shadowRoot.host === header
 ```
 
-Not all elements can be shadow hosts - `input` and `textarea` already host shadow trees, for example. The full list of eligible elements can be found in the [web components v1 spec](http://w3c.github.io/webcomponents/spec/shadow/#h-methods)
+Not all elements can be shadow hosts - `input`, `video` and `textarea` already host shadow trees, for example. The full list of eligible elements can be found in the [web components v1 spec](http://w3c.github.io/webcomponents/spec/shadow/#h-methods)
 
 Since everything in the shadow dom is scoped, it is useful for creating webcomponents.
 Webcomponents are able to attach a shadow root to themselves:

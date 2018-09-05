@@ -16,7 +16,7 @@ This is mostly examplified in the slide, but here's the custom element code:
         --counter-main-color: tomato;
     }
     .custom-counter {
-        border: 1px solid var(--counter-main-color);
+        border: 1px dashed var(--counter-main-color);
         padding: 10px;
         display: inline-flex;
         flex-direction: column;
@@ -78,7 +78,7 @@ This is mostly examplified in the slide, but here's the custom element code:
 ```
 We can stuff all this in `custom-counter.html`.
 
-To actually use it in another HTML file, we can use another nifty new feature - HTML imports:
+To make use of it in another HTML file, we can use another nifty new feature - HTML imports:
 ```html
 <link rel="import" href="source/to-your-file.html">
 ```
