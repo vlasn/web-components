@@ -38,6 +38,34 @@ const style = `
         width: 100%;
         box-sizing: border-box;
     }
+
+    .item.fail {
+        animation: failed .2s 0 infinite;
+    }
+
+    @keyframes failed {
+        from {
+            background-color: #fff;
+        }
+
+        to {
+            background-color: #f00;
+        }
+    }
+
+    .item.success {
+        animation: success .2s 0 infinite;
+    }
+
+    @keyframes success {
+        from {
+            background-color: #fff;
+        }
+
+        to {
+            background-color: #0f0;
+        }
+    }
 `;
 
 const getAttributeValue = (attributes, curr) => {
