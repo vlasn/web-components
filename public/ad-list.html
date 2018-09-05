@@ -19,12 +19,15 @@
                     title: "test2"
                 }
             ];
-            const content = this.mapAds();
-            this.shadowRoot.innerHTML = content;
+            this.shadowRoot.innerHTML = this.mapAds();
         }
 
         mapAds() {
             return this.ads.map(ad => `<dragon-ad >${ad.title}</dragon-ad>`).join('');
+        }
+
+        getAds() {
+
         }
 
     }
