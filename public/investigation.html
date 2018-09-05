@@ -1,4 +1,4 @@
-<template>
+<template id="investigation">
     <button type="button">
         Investigate
     </button>
@@ -6,4 +6,18 @@
 
 <style></style>
 
-<script></script>
+<script>
+    class Investigation extends HTMLElement {
+        constructor() {
+            super();
+
+            const importDoc = document.currentScript.ownerDocument;
+            this.attachShadow({ mode: 'open' });
+            this.shadowRoot.appendChild(importDoc.querySelector('style'));
+            const content = importDoc.querySelector('#investigation').content;
+            this.shadowRoot.appendChild(content);
+        }
+
+    }
+    window.customElements.define('dragon-investigation', Investigation);
+</script>
