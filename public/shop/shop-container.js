@@ -6,8 +6,10 @@ class ShopContainer extends HTMLElement {
     }
 
     async connectedCallback() {
+        await game.start();
+        
+        const items = await game.getShopInventory()
 
-        const items = await this.getItems()
         const style = `#shopping-cart {
               position:fixed;
               top:20px;
