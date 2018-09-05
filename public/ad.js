@@ -16,6 +16,7 @@ const style = `
         border-radius: 10px;
         padding: 20px;
         margin-bottom: 20px;
+        background-color: #fff;
     }
 
     h3 {
@@ -33,8 +34,44 @@ const style = `
         font-size: 32px;
         line-height: 1.3;
         border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .item.fail {
+        animation: failed .2s 0 infinite;
+    }
+
+    @keyframes failed {
+        from {
+            background-color: #fff;
+        }
+
+        to {
+            background-color: #f00;
+        }
+    }
+
+    .item.success {
+        animation: success .2s 0 infinite;
+    }
+
+    @keyframes success {
+        from {
+            background-color: #fff;
+        }
+
+        to {
+            background-color: #0f0;
+        }
     }
 `;
+
+const getAttributeValue = (attributes, curr) => {
+    const namedItem = attributes.getNamedItem(curr);
+    return namedItem && namedItem.value ? namedItem.value : '';
+};
 
 class Ad extends HTMLElement {
     constructor () {
@@ -46,27 +83,41 @@ class Ad extends HTMLElement {
         this.shadowRoot.appendChild(styleElement)
 
         const attrs = ['reward', 'status'].reduce((total, curr) => {
-            const namedItem = this.attributes.getNamedItem(curr);
-            total[curr] = namedItem && namedItem.value ? namedItem.value : '';
+            total[curr] = getAttributeValue(this.attributes, curr);
 
             return total;
         }, {});
 
         const content = document.createElement('div');
-        console.log('perse', attrs);
         content.innerHTML = generateContent(attrs);
         this.shadowRoot.appendChild(content);
+
+        this.shadowRoot.querySelector('button').addEventListener('click', e => {
+            this.dispatchEvent(new CustomEvent('kill', {
+                bubbles: true,
+                detail: {
+                    adId: getAttributeValue(this.attributes, 'adId')
+                }
+            }));
+        })
     }
     observedAttributes () {
         return ['adId', 'reward', 'status']
     }
     attributeChangedCallback (attr, oldVal, newVal) {
         if (attr === 'status') {
+            const item = this.shadowRoot.querySelector('.item');
+            let audio;
+
             if (newVal === 'success') {
-                this.shadowRoot.querySelector('.item').classList.add('success');
+                item.classList.add('success');
+                audio = new Audio('success.mp3');
             } else {
-                this.shadowRoot.querySelector('.item').classList.add('fail');
+                item.classList.add('fail');
+                audio = new Audio('fail.mp3');
             }
+
+            audio.play();
         }
     }
 }

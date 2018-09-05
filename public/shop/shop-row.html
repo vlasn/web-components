@@ -3,7 +3,7 @@
         <div class="shopping-cell row-id"></div>
         <div class="shopping-cell row-name">No name?</div>
         <div class="shopping-cell row-cost"></div>
-        <div class="shopping-cell row-buttons"></div>
+        <div class="shopping-cell row-buttons"><button class="shopping-cell-button">Buy 🛒</button></div>
     </div>
     <style>
         .shopping-row {
@@ -24,13 +24,32 @@ const importDoc = document.currentScript.ownerDocument
 class ShopRow extends HTMLElement {
     constructor () {
         super ()
-        this.attachShadow({mode: 'open'})
-        // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
-        // in a separate variable and have access to it via `this`
-        const content = importDoc.querySelector('template#shop-row').content
-        content.querySelector(".row-cost").innerHTML = this.getAttribute('cost')
-        content.querySelector(".row-id").innerHTML = this.getAttribute('id')
-        this.shadowRoot.appendChild(content)
+        this.shadow = this.attachShadow({mode: 'open'})
+    }
+
+    setAttributeValue(cssSelector, attribute) {
+      const el = importDoc.querySelector('template#shop-row').content.querySelector(cssSelector)
+      if (el) {
+        el.innerHtml = this.getAttribute(attribute)
+      }
+    }
+
+    connectedCallback() {
+
+      const content = importDoc.querySelector('template#shop-row').content
+      this.setAttributeValue('.row-name', 'name')
+      this.setAttributeValue('.row-cost', 'cost')
+      this.setAttributeValue('.row-id', 'id')
+      this.itemId = this.getAttribute('id')
+      this.shadowRoot.appendChild(document.importNode(content, true))
+      this.shadowRoot.querySelector('button').addEventListener('click', e => {
+        game.buyItem(this.itemId).then(result => {
+            this.dispatchEvent(new CustomEvent('shopEvent', {
+                bubbles: true,
+                detail: result,
+            }));
+        })
+      })
     }
 }
 window.customElements.define('shop-row', ShopRow)
