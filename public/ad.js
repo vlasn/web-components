@@ -44,8 +44,8 @@ const style = `
     .item.fail {
         animation: failed .1s .2s infinite;
     }
-    .item.fail button,
-    .item.fail button {
+    .item.fail,
+    .item.success {
         pointer-events: none
     }
 

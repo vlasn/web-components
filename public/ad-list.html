@@ -52,7 +52,7 @@
             const res = await window.game.solve(id);
             el.setAttribute('status', res.success ? 'success' : 'fail');
 
-            this.dispatchEvent(new CustomEvent('solveEvent', {
+            window.dispatchEvent(new CustomEvent('solveEvent', {
                 detail: res
             }));
 

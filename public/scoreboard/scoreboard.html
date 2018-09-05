@@ -1,0 +1,127 @@
+<template id="score-board">
+  <div class="score-board">
+    <div class="char"></div>
+    <h2>🎮Game #<span id="game">0</span></h2>
+    <div class="score-fileds">
+      <div class="field">
+        <strong>💰Gold</strong>
+        <span id="gold">0</span>
+      </div>
+      <div class="field">
+        <strong>❤️Life</strong>
+        <span id="life">0</span>
+      </div>
+      <div class="field">
+        <strong>🏆Score</strong>
+        <span id="score">0</span>
+      </div>
+      <div class="field">
+        <strong>📌Turn</strong>
+        <span id="turn">0</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style>
+  .score-board {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #fff;
+    border: 1px solid silver;
+    border-radius: 20px;
+    padding: 20px 30px;
+  }
+  .char {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    background: url(scoreboard/img/toothless.png) no-repeat #8646c5;
+    background-size: cover;
+    background-position: center center;
+  }
+  h2 {
+    margin: 0 0 20px 0;
+    border-bottom: 2px dotted;
+  }
+  .score-fields {
+
+  }
+  .field {
+    background: #000;
+    margin: 5px 0;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    line-height: 30px;
+  }
+  .field strong, .field span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .field span {
+    float:right;
+  }
+
+</style>
+
+<script>
+  class Scoreboard extends HTMLElement {
+    constructor () {
+      super ();
+      const importDoc = document.currentScript.ownerDocument;
+      this.attachShadow({mode: 'open'});
+      this.shadowRoot.appendChild(importDoc.querySelector('style'));
+      const content = importDoc.querySelector('template#score-board').content;
+      this.shadowRoot.appendChild(content);
+    }
+
+    updateState(event) {
+      console.log('event:', event);
+      const scoreboardData = event.detail;
+      this.setGameId(window.game.gameId || '0000');
+      if ('score' in scoreboardData) {
+        this.setScore(scoreboardData.score);
+      }
+      this.setGold(scoreboardData.gold || '0');
+      this.setLives(scoreboardData.lives || '0');
+      this.setTurns(scoreboardData.turn || '0');
+    }
+
+    connectedCallback() {
+      this.shopListener = window.addEventListener('shopEvent', e => {
+        this.updateState(e);
+      });
+      this.solveListener = window.addEventListener('solveEvent', e => {
+        this.updateState(e);
+      });
+    }
+
+    disconnectedCallback() {
+      this.shopListener.removeEventListener('shopEvent');
+      this.solveListener.removeEventListener('solveEvent');
+    }
+
+    setGameId(gameId) {
+      this.shadowRoot.getElementById('game').innerHTML = gameId;
+    }
+
+    setGold(gold) {
+      this.shadowRoot.getElementById('score').innerHTML = gold;
+    }
+
+    setLives(lives) {
+      this.shadowRoot.getElementById('life').innerHTML = lives;
+    }
+
+    setScore(score) {
+      this.shadowRoot.getElementById('score').innerHTML = score;
+    }
+
+    setTurns(turns) {
+      this.shadowRoot.getElementById('turn').textContent = turns;
+    }
+  }
+  window.customElements.define('game-scoreboard', Scoreboard);
+</script>
