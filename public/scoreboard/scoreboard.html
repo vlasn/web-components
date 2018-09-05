@@ -69,15 +69,71 @@
 <script>
   class Scoreboard extends HTMLElement {
     constructor () {
-      super ()
-      const importDoc = document.currentScript.ownerDocument
-      this.attachShadow({mode: 'open'})
+      super ();
+      const importDoc = document.currentScript.ownerDocument;
+      this.attachShadow({mode: 'open'});
       // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
       // in a separate variable and have access to it via `this`
-      this.shadowRoot.appendChild(importDoc.querySelector('style'))
-      const content = importDoc.querySelector('template#score-board').content
-      this.shadowRoot.appendChild(content)
+      this.shadowRoot.appendChild(importDoc.querySelector('style'));
+      const content = importDoc.querySelector('template#score-board').content;
+      this.shadowRoot.appendChild(content);
+      this.updateState({
+        data: [
+          {score: 0},
+          {gold: 0},
+          {lives: 3},
+          {turns: 0}
+        ]
+      });
+    }
+
+    updateState(event) {
+      console.log('event:', event);
+      const scoreboardData = event.detail.data;
+      this.setGameId(window.game.gameId || '0000');
+      this.setScore(scoreboardData.score || '0');
+      this.setGold(scoreboardData.gold || '0');
+      this.setLives(scoreboardData.lives || '0');
+      this.setTurns(scoreboardData.turns || '0');
+    }
+
+    connectedCallback() {
+      console.log('Component has been initialized!');
+      this.shopListener = window.addEventListener('shopEvent', e => {
+        console.log('shopEvent:', e);
+        this.updateState(e);
+        // this.setAttribute('count', (parseInt(this.getAttribute('count'))+ 1) || 0);
+      });
+      this.solveListener = window.addEventListener('solveEvent', e => {
+        console.log('solveEvent:', e);
+        this.updateState(e);
+      });
+    }
+
+    disconnectedCallback() {
+      this.shopListener.removeEventListener('shopEvent');
+      this.solveListener.removeEventListener('solveEvent');
+    }
+
+    setGameId(gameId) {
+      this.shadowRoot.getElementById('game').innerHTML = gameId;
+    }
+
+    setGold(gold) {
+      this.shadowRoot.getElementById('score').innerHTML = gold;
+    }
+
+    setLives(lives) {
+      this.shadowRoot.getElementById('life').innerHTML = lives;
+    }
+
+    setScore(score) {
+      this.shadowRoot.getElementById('score').innerHTML = score;
+    }
+
+    setTurns(turns) {
+      this.shadowRoot.getElementById('turn').innerHTML = turns;
     }
   }
-  window.customElements.define('game-scoreboard', Scoreboard)
+  window.customElements.define('game-scoreboard', Scoreboard);
 </script>
