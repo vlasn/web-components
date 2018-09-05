@@ -38,6 +38,9 @@ const style = `
         width: 100%;
         box-sizing: border-box;
     }
+    button:focus {
+        outline: none;
+    }
 
     .item.fail {
         animation: failed .2s 0 infinite;
