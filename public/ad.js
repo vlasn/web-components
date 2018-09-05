@@ -38,9 +38,12 @@ const style = `
         width: 100%;
         box-sizing: border-box;
     }
+    button:focus {
+        outline: none;
+    }
 
     .item.fail {
-        animation: failed .2s 0 infinite;
+        animation: failed .2s .2s infinite;
     }
 
     @keyframes failed {
@@ -54,7 +57,7 @@ const style = `
     }
 
     .item.success {
-        animation: success .2s 0 infinite;
+        animation: success .2s .2s infinite;
     }
 
     @keyframes success {
@@ -101,17 +104,23 @@ class Ad extends HTMLElement {
             }));
         })
     }
-    observedAttributes () {
+    static get observedAttributes () {
         return ['adId', 'reward', 'status']
     }
     attributeChangedCallback (attr, oldVal, newVal) {
         if (attr === 'status') {
             const item = this.shadowRoot.querySelector('.item');
+            let audio;
+
             if (newVal === 'success') {
                 item.classList.add('success');
+                audio = new Audio('success.mp3');
             } else {
                 item.classList.add('fail');
+                audio = new Audio('fail.mp3');
             }
+
+            audio.play();
         }
     }
 }

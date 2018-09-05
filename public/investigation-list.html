@@ -15,8 +15,17 @@
             this.shadowRoot.appendChild(investigationListDoc.querySelector('style'));
             const content = investigationListDoc.querySelector('#investigationList').content;
             this.shadowRoot.appendChild(content);
+            this.list = this.shadowRoot.querySelector('.investigation-list');
 
+            this.itemsList = {};
+        }
 
+        set itemsList(res) {
+            this.list.innerHTML = this.mapItems(res);
+        }
+
+        mapItems(items) {
+            return Object.keys(items).map(key => `<li>${key}: ${items[key]}</li>`).join(' ');
         }
     }
     window.customElements.define('dragon-investigation-list', InvestigationList);
