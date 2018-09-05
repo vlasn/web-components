@@ -16,6 +16,9 @@ class ShopContainer extends HTMLElement {
               right:20px;
               box-shadow: 0 0 3px #ccc;
               width:330px;
+              border-radius:7px;
+              border: 1px solid #ddd;
+              padding:20px;
           }
           `
         console.log('shop items', items)
