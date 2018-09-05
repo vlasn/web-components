@@ -16,10 +16,14 @@ class ShopContainer extends HTMLElement {
               right:20px;
               box-shadow: 0 0 3px #ccc;
               width:330px;
+              border-radius:7px;
+              border: 1px solid #ddd;
+              padding:20px;
           }
           `
         console.log('shop items', items)
         this.shadow.innerHTML =  `<section id="shopping-cart">
+                                    SHOP
                                     <div class="shopping-table">
                                         ${items.map(item => `<shop-row id=${item.id} name=${item.name} cost=${item.cost} ></shop-row>`).join("")}
                                     </div>
