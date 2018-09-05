@@ -9,12 +9,11 @@
             display:flex;
         }
         .shopping-cell {
-            flex:1 0 auto;
-            max-width: 50%;
+            float:left;
+            width:33%;
         }
         .row-buttons {
-            margin-left: auto;
-            text-align:right; 
+            text-align:right;
         }
     </style>
 </template>
@@ -34,7 +33,7 @@ class ShopRow extends HTMLElement {
     setAttributeValue(cssSelector, attribute) {
       const el = importDoc.querySelector('template#shop-row').content.querySelector(cssSelector)
       if (el) {
-        el.innerHtml = this.getAttribute(attribute)
+        el.innerHTML = this.getAttribute(attribute)
       }
     }
 
