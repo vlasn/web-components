@@ -3,19 +3,18 @@
 </template>
 
 <style>
-    :root {
+    :host {
         --number-color: #bada55;
     }
 
     .investigation-list {
+        display: grid;
         list-style: none;
         padding-left: 0;
-        border-top: 1px solid var(--number-color);
     }
 
     .investigation-list li {
         padding: 5px;
-        border-bottom: 1px solid var(--number-color);
     }
 
     .investigation-list span {
