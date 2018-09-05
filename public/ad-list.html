@@ -31,7 +31,7 @@
         setListeners() {
             Array.from(this.shadowRoot.querySelectorAll('dragon-ad'))
                 .forEach(el => {
-                    el.addEventListener('click', () => this.handleAdClick(el))
+                    el.addEventListener('kill', () => this.handleAdClick(el))
                 })
         }
 
@@ -41,7 +41,9 @@
 
             this.dispatchEvent(new CustomEvent('solveEvent', {
                 detail: res
-            }))
+            }));
+
+            setTimeout(el.remove, 2000)
         }
 
         async getAds() {
