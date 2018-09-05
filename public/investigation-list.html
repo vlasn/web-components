@@ -2,7 +2,27 @@
     <ul class="investigation-list"></ul>
 </template>
 
-<style></style>
+<style>
+    :root {
+        --number-color: #bada55;
+    }
+
+    .investigation-list {
+        list-style: none;
+        padding-left: 0;
+        border-top: 1px solid var(--number-color);
+    }
+
+    .investigation-list li {
+        padding: 5px;
+        border-bottom: 1px solid var(--number-color);
+    }
+
+    .investigation-list span {
+        color: var(--number-color);
+        font-weight: bold;
+    }
+</style>
 
 <script>
     const investigationListDoc = document.currentScript.ownerDocument;
@@ -25,7 +45,7 @@
         }
 
         mapItems(items) {
-            return Object.keys(items).map(key => `<li>${key}: ${items[key]}</li>`).join(' ');
+            return Object.keys(items).map(key => `<li>${key}: <span>${items[key]}</span></li>`).join(' ');
         }
     }
     window.customElements.define('dragon-investigation-list', InvestigationList);
