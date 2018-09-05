@@ -44,6 +44,10 @@ const style = `
     .item.fail {
         animation: failed .2s .2s infinite;
     }
+    .item.fail button,
+    .item.fail button {
+        pointer-events: none
+    }
 
     @keyframes failed {
         from {
