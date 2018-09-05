@@ -44,7 +44,7 @@ class ShopRow extends HTMLElement {
       this.shadowRoot.appendChild(document.importNode(content, true))
       this.shadowRoot.querySelector('button').addEventListener('click', e => {
         game.buyItem(this.itemId).then(result => {
-            this.dispatchEvent(new CustomEvent('shopEvent', {
+            window.dispatchEvent(new CustomEvent('shopEvent', {
                 bubbles: true,
                 detail: result,
             }));
