@@ -44,8 +44,8 @@ const style = `
     .item.fail {
         animation: failed .2s .2s infinite;
     }
-    .item.fail button,
-    .item.fail button {
+    .item.fail,
+    .item.success {
         pointer-events: none
     }
 
@@ -60,7 +60,7 @@ const style = `
             background-color: #f00;
             box-shadow: 10px 10px 100px 50px #f00;
             outline: 5px solid #f00;
-            transform: scale(5);
+            transform: rotate(180deg);
         }
     }
 
@@ -79,7 +79,7 @@ const style = `
             background-color: #0f0;
             box-shadow: 10px 10px 100px 50px #0f0;
             outline: 5px solid #0f0;
-            transform: scale(5);
+            transform: rotate(180deg);
         }
     }
 `;
