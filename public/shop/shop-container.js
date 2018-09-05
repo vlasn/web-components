@@ -1,13 +1,4 @@
-
-const template = `<template>
-                    <section id="shopping-cart">
-                      <slot name="shopping-items"></slot>
-                    </section>
-                  </template>`;
-
-
 const game = new Game();
-
 
 class ShopContainer extends HTMLElement {
     constructor() {
@@ -22,7 +13,9 @@ class ShopContainer extends HTMLElement {
     }
 
     async connectedCallback() {
-        this.shadow.innerHTML = '<b>Cart</b>'
+        this.shadow.innerHTML =  `<section id="shopping-cart">
+                                    <shop-row></shop-row>
+                                  </section>`;
     }
 }
 
