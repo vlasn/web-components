@@ -1,25 +1,45 @@
-
 class ShopContainer extends HTMLElement {
-    constructor() {
-        super()
-        this.game = new Game();
-        this.shadow = this.attachShadow({mode: 'open'})
+  constructor() {
+    super()
+    this.shadow = this.attachShadow({
+      mode: 'open'
+    })
+  }
 
-    }
+  async connectedCallback() {
+    await game.start();
+    const items = await game.getShopInventory()
 
-    async getItems() {
-        await this.game.start();
-        return await this.game.getShopInventory();
-    }
-
-    async connectedCallback() {
-
-        const items = await this.getItems()
+    const style = `#shopping-cart {
+              position:fixed;
+              top:20px;
+              right:20px;
+              box-shadow: 0 0 3px #ccc;
+              width:330px;
+              border-radius:7px;
+              border: 1px solid #ddd;
+              padding:20px;
+              overflow:hidden;
+              background-color:white;
+              height:66px;
+          }
+          .shopping-title {
+            padding-bottom:40px;
+          }
+          #shopping-cart:hover {
+            height:auto;
+          }
+          `
         console.log('shop items', items)
         this.shadow.innerHTML =  `<section id="shopping-cart">
-                                    ${items.map(item => `<shop-row id=${item.id} name=${item.name} cost=${item.cost} ></shop-row>`).join("")}
-                                  </section>`;
-    }
+                                    <h2 class="shopping-title">Shop</h2>
+                                    <div class="shopping-table">
+                                        ${items.map(item => `<shop-row id=${item.id} name=${item.name} cost=${item.cost} ></shop-row>`).join("")}
+                                    </div>
+                                  </section>
+                                  <style>${style}</style>`;
+
+  }
 }
 
 

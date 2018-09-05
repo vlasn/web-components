@@ -1,10 +1,18 @@
 <template id="shop-row">
-    <tr>
-        <td class="row-id"></td>
-        <td class="row-name">No name?</td>
-        <td class="row-cost"></td>
-        <td class="row-buttons"><button>Buy</button></td>
-    </tr>
+    <div class="shopping-row">
+        <div class="shopping-cell row-id"></div>
+        <div class="shopping-cell row-name">No name?</div>
+        <div class="shopping-cell row-cost"></div>
+        <div class="shopping-cell row-buttons"><button class="shopping-cell-button">Buy 🛒</button></div>
+    </div>
+    <style>
+        .shopping-row {
+            display:flex;
+        }
+        .shopping-cell {
+            flex:1 0 33.3%;
+        }
+    </style>
 </template>
 
 <style>

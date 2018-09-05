@@ -13,29 +13,50 @@
             // in a separate variable and have access to it via `this`
             this.shadowRoot.appendChild(importDoc.querySelector('style'))
 
-            this.ads = [
-                {
-                    title: "test1"
-                },
-                {
-                    title: "test2"
-                }
-            ];
-            this.shadowRoot.innerHTML = this.mapAds();
+            game.start()
+                .then(this.getAds)
+                .then((messages) => {
+                    console.log('Messages', messages);
+
+                    this.ads = messages;
+                    this.shadowRoot.innerHTML = this.mapAds();
+                    this.setListeners();
+                });
         }
 
         mapAds() {
-            return this.ads.map(ad => `<dragon-ad >${ad.title}</dragon-ad>`).join('');
+            return this.ads.map(ad => `<dragon-ad ad-id="${ad.adId}" reward="${ad.reward}" probability="${ad.probability}" >${ad.message}</dragon-ad>`).join('');
         }
 
-        getAds() {
-
+        setListeners() {
+            Array.from(this.shadowRoot.querySelectorAll('dragon-ad'))
+                .forEach(el => {
+                    el.addEventListener('kill', () => this.handleAdClick(el))
+                })
         }
 
-        handleStart() {
+        async handleAdClick(el) {
+            console.log('kill!');
+            const id = el.getAttribute('ad-id');
+            const res = await window.game.solve(id);
+            el.setAttribute('status', res.success ? 'success' : 'fail');
 
+            this.dispatchEvent(new CustomEvent('solveEvent', {
+                detail: res
+            }));
+
+
+            setTimeout(() => {
+                el.remove();
+                this.ads = this.ads.filter(ad => id !== ad.id);
+            }, 2000)
+        }
+
+        async getAds() {
+            return await window.game.getMessages();
         }
 
     }
     window.customElements.define('dragon-ad-list', AdList)
 </script>
+
