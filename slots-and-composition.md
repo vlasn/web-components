@@ -9,9 +9,9 @@ Lets consider the template for a simple business card type component:
     <div class="card">
         <!-- Here we have a named slot with content to fall back to in case the consumer does not pass it anything -->
         <div class="image">
-                <slot name="image">
-                    <img src="profile-picture.png" class="card-image">
-                </slot>
+            <slot name="image">
+                <img src="profile-picture.png" class="card-image">
+            </slot>
         </div>
         <div class="name">
             <!-- Here's a named slot without fallback content -->

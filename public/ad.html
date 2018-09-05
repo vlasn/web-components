@@ -1,0 +1,24 @@
+<template id="ad">
+    <div>
+        Ad component comes here
+    </div>
+</template>
+
+<style>
+</style>
+
+<script>
+    class Ad extends HTMLElement {
+        constructor () {
+            super ()
+            const importDoc = document.currentScript.ownerDocument
+            this.attachShadow({mode: 'open'})
+            // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
+            // in a separate variable and have access to it via `this`
+            this.shadowRoot.appendChild(importDoc.querySelector('style'))
+            const content = importDoc.querySelector('template#ad').content
+            this.shadowRoot.appendChild(content)
+        }
+    }
+    window.customElements.define('dragon-ad', Ad)
+</script>
