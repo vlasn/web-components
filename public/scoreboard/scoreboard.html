@@ -7,7 +7,7 @@
     </div>
     <div class="score-field">
       <strong>Life</strong>
-      <span id="life">0</span>
+      <span id="life">3</span>
     </div>
     <div class="score-field">
       <strong>Score</strong>
@@ -47,18 +47,23 @@
       this.shadowRoot.appendChild(importDoc.querySelector('style'));
       const content = importDoc.querySelector('template#score-board').content;
       this.shadowRoot.appendChild(content);
+      //this.updateState();
+    }
 
-      this.setGameId(window.game.gameId);
-      this.setScore(0);
-      this.setGold(0);
-      this.setLives(3);
-      this.setTurns(0);
+    updateState(event) {
+      const scoreboardData = event.data;
+      this.setGameId(window.game.gameId || '0000');
+      this.setScore(scoreboardData.score);
+      this.setGold(scoreboardData.gold);
+      this.setLives(scoreboardData.lives);
+      this.setTurns(scoreboardData.turns);
     }
 
     connectedCallback() {
       console.log('Component has been initialized!');
       this.shopListener = window.addEventListener('shopEvent', e => {
         console.log('shopEvent:', e);
+        this.updateState(e);
         // this.setAttribute('count', (parseInt(this.getAttribute('count'))+ 1) || 0);
       });
       this.solveListener = window.addEventListener('solveEvent', e => {
@@ -72,27 +77,23 @@
     }
 
     setGameId(gameId) {
-      this.gameId = gameId;
+      this.shadowRoot.getElementById('game').innerHTML = gameId;
     }
 
     setGold(gold) {
-      this.gold = gold;
+      this.shadowRoot.getElementById('score').innerHTML = gold;
     }
 
     setLives(lives) {
-      this.lives = lives;
+      this.shadowRoot.getElementById('life').innerHTML = lives;
     }
 
     setScore(score) {
-      this.score = score;
+      this.shadowRoot.getElementById('score').innerHTML = score;
     }
 
     setTurns(turns) {
-      this.turns = turns;
-    }
-
-    getScore() {
-      return this.score;
+      this.shadowRoot.getElementById('turn').innerHTML = turns;
     }
   }
   window.customElements.define('game-scoreboard', Scoreboard);
