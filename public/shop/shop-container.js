@@ -1,19 +1,26 @@
+
 class ShopContainer extends HTMLElement {
     constructor() {
         super()
-        this.addEventListener('click', e => {
-        })
-      
-      // test
+        this.game = new Game();
+        this.shadow = this.attachShadow({mode: 'open'})
+
     }
-    get observedAttributes () {
-        return ['disabled', 'expanded']
+
+    async getItems() {
+        await this.game.start();
+        return await this.game.getShopInventory();
     }
-    connectedCallback() {
-        console.log('I was inserted into the DOM!')
-        this.innerHTML = '<b>test</b><shop-row></shop-row>'
+
+    async connectedCallback() {
+
+        const items = await this.getItems()
+        console.log('shop items', items)
+        this.shadow.innerHTML =  `<section id="shopping-cart">
+                                    <shop-row></shop-row>
+                                  </section>`;
     }
 }
 
 
-window.customElements.define('shopping-container', ShopContainer)
+window.customElements.define('shopping-cart', ShopContainer)

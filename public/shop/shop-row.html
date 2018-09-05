@@ -8,17 +8,17 @@
 </style>
 
 <script>
-    class ShopRow extends HTMLElement {
-        constructor () {
-            super ()
-            const importDoc = document.currentScript.ownerDocument
-            this.attachShadow({mode: 'open'})
-            // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
-            // in a separate variable and have access to it via `this`
-            this.shadowRoot.appendChild(importDoc.querySelector('style'))
-            const content = importDoc.querySelector('template#shop-row').content
-            this.shadowRoot.appendChild(content)
-        }
+const importDoc = document.currentScript.ownerDocument
+
+class ShopRow extends HTMLElement {
+    constructor () {
+        super ()
+        this.attachShadow({mode: 'open'})
+        // As we attached a shadowroot to `this` directly, we don't need to keep a reference to shadowRoot
+        // in a separate variable and have access to it via `this`
+        const content = importDoc.querySelector('template#shop-row').content
+        this.shadowRoot.appendChild(content)
     }
-    window.customElements.define('shop-row', ShopRow)
+}
+window.customElements.define('shop-row', ShopRow)
 </script>
