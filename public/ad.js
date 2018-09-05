@@ -38,6 +38,34 @@ const style = `
         width: 100%;
         box-sizing: border-box;
     }
+
+    .item.fail {
+        animation: failed .2s 0 infinite;
+    }
+
+    @keyframes failed {
+        from {
+            background-color: #fff;
+        }
+
+        to {
+            background-color: #f00;
+        }
+    }
+
+    .item.success {
+        animation: success .2s 0 infinite;
+    }
+
+    @keyframes success {
+        from {
+            background-color: #fff;
+        }
+
+        to {
+            background-color: #0f0;
+        }
+    }
 `;
 
 const getAttributeValue = (attributes, curr) => {
@@ -73,17 +101,23 @@ class Ad extends HTMLElement {
             }));
         })
     }
-    observedAttributes () {
+    static get observedAttributes () {
         return ['adId', 'reward', 'status']
     }
     attributeChangedCallback (attr, oldVal, newVal) {
         if (attr === 'status') {
             const item = this.shadowRoot.querySelector('.item');
+            let audio;
+
             if (newVal === 'success') {
                 item.classList.add('success');
+                audio = new Audio('success.mp3');
             } else {
                 item.classList.add('fail');
+                audio = new Audio('fail.mp3');
             }
+
+            audio.play();
         }
     }
 }

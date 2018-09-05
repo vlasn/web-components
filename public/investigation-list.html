@@ -16,7 +16,15 @@
             const content = investigationListDoc.querySelector('#investigationList').content;
             this.shadowRoot.appendChild(content);
 
+            this.itemsList = {};
+        }
 
+        set itemsList(res) {
+            this.shadowRoot.innerHTML = this.mapItems(res);
+        }
+
+        mapItems(items) {
+            return Object.keys(items).map(key => `<li>${key} : ${items[key]}</li>`).join(' ');
         }
     }
     window.customElements.define('dragon-investigation-list', InvestigationList);

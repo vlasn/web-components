@@ -25,7 +25,7 @@
         }
 
         emitCustomEvent() {
-            return this.dispatchEvent(new CustomEvent('investigate', {
+            this.dispatchEvent(new CustomEvent('investigate', {
                 bubbles: true,
                 detail: {
                     investigate: true,
