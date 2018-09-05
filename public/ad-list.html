@@ -45,11 +45,15 @@
                 detail: res
             }));
 
+            this.removeElement(el);
+        }
 
+        removeElement(el, timeout = 2000) {
+            const id = el.getAttribute('ad-id');
             setTimeout(() => {
                 el.remove();
-                this.ads = this.ads.filter(ad => id !== ad.id);
-            }, 2000)
+                this.ads = this.ads.filter(ad => id !== ad.adId);
+            }, timeout)
         }
 
         async getAds() {
