@@ -7,17 +7,21 @@
 <style></style>
 
 <script>
-    class Investigation extends HTMLElement {
-        constructor() {
-            super();
+    const investigationDoc = document.currentScript.ownerDocument;
 
-            const importDoc = document.currentScript.ownerDocument;
-            this.attachShadow({ mode: 'open' });
-            this.shadowRoot.appendChild(importDoc.querySelector('style'));
-            const content = importDoc.querySelector('#investigation').content;
-            this.shadowRoot.appendChild(content);
+    (async () => {
+        const gameObject = await window.game.start();
+
+        class Investigation extends HTMLElement {
+            constructor() {
+                super();
+
+                this.attachShadow({ mode: 'open' });
+                this.shadowRoot.appendChild(investigationDoc.querySelector('style'));
+                const content = investigationDoc.querySelector('#investigation').content;
+                this.shadowRoot.appendChild(content);
+            }
         }
-
-    }
-    window.customElements.define('dragon-investigation', Investigation);
+        window.customElements.define('dragon-investigation', Investigation);
+    })();
 </script>
